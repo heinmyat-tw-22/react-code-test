@@ -1,0 +1,65 @@
+@import "../../../assets/colors.scss";
+@import "../../../assets/index";
+
+.navbar {
+  @include themify($themes) {
+    padding: 20px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .navbar-left {
+      cursor: pointer;
+      img {
+        object-fit: cover;
+      }
+    }
+
+    .search-container {
+      display: flex;
+      padding: 8px 20px;
+      background-color: themed(input-bg-color);
+      border-radius: 25px;
+      width: 400px;
+      justify-content: space-between;
+
+      input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: themed(active);
+        width: 80%;
+      }
+
+      .search-icon {
+        color: themed(active);
+      }
+    }
+
+    .navbar-right {
+      .navbar-icons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        // color: $icon-color;
+        color: gray;
+
+        .active {
+          color: themed(active);
+        }
+
+        .navbar-icon {
+          font-size: 28px;
+          cursor: pointer;
+          font-weight: lighter;
+
+          &:hover {
+            color: lightgray;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+// @import "../../../assets/colors.scss";
+@import "../../../assets/index";
+
+.layout {
+  @include themify($themes) {
+    height: 100%;
+    width: 100%;
+    background-color: themed(bg-color);
+    overflow: auto;
+  }
+}

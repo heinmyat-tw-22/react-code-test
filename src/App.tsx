@@ -1,26 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from "@emotion/react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./assets/app.scss";
+import Mui_Theme from "./assets/mui-theme";
+import Layout from "./components/layout/layout/Layout";
+import { addPosts } from "./context/PostSlice";
+import { ThemeContext } from "./context/themeContext";
+import { useAppDispatch } from "./hooks/useAppSelector";
+import Home from "./pages/home/Home";
+import SinglePost from "./pages/single-post/SinglePost";
+import { axiosInstance } from "./utils/axiosInstance";
 
-function App() {
+const App = () => {
+  const { themeMode } = useContext(ThemeContext);
+  const dispatch = useAppDispatch();
+  const dispatchRef = useRef(dispatch);
+
+  useEffect(() => {
+    const fetchAllPosts = async () => {
+      const res = await axiosInstance.get(`posts`);
+
+      dispatchRef.current(addPosts(res.data));
+    };
+
+    fetchAllPosts();
+  }, []);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/popular",
+          element: <Home />,
+        },
+        {
+          path: "/categories",
+          element: <Home />,
+        },
+        {
+          path: "/archives",
+          element: <Home />,
+        },
+        {
+          path: "/user",
+          element: <Home />,
+        },
+        {
+          path: "/post/:id",
+          element: <SinglePost />,
+        },
+      ],
+    },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={Mui_Theme(themeMode)}>
+      <div className={`app-wrapper theme-${themeMode ? "dark" : "light"}`}>
+        <RouterProvider router={router} />
+      </div>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

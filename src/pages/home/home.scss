@@ -1,0 +1,17 @@
+@import "../../assets/colors.scss";
+@import "../../assets/index";
+
+.home {
+  width: 100%;
+
+  .postsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+
+    
+  }
+}
