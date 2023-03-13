@@ -1,0 +1,4 @@
+const truncateText = (source: string, size: number) =>
+  source.length > size ? source.slice(0, size - 1) + "…" : source;
+
+export default truncateText;

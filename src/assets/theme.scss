@@ -1,0 +1,49 @@
+@import "./colors.scss";
+
+$themes: (
+  light: (
+    textColor: #000,
+    bg-color: $w-bg-color,
+    active: black,
+    bgSoft: #f6f3f3,
+    textColorSoft: #555,
+    border: lightgray,
+    input-bg-color: $w-input-bg-color,
+    card-bg-color: $w-card-bg-color,
+    single-post-bg-color: $w-single-post-bg-color,
+  ),
+  dark: (
+    textColor: $text-color,
+    bg-color: $bg-color,
+    active: white,
+    bgSoft: $card-bg-color,
+    textColorSoft: $text-gray-color,
+    border: #444,
+    input-bg-color: $input-bg-color,
+    card-bg-color: $card-bg-color,
+    single-post-bg-color: $single-post-bg-color,
+  ),
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

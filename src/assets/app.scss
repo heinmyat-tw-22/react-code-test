@@ -1,0 +1,51 @@
+@import "./colors.scss";
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+section::-webkit-scrollbar {
+  display: none;
+}
+
+.app-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  height: 25px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}
